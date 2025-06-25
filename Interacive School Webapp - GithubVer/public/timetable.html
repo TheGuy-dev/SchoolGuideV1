@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>School Guide | Timetable</title>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="/CSS/style.css" />
+
+  <!-- Scripts loaded defer -->
+  <script src="/JAVASCRIPT/main.js" defer></script>
+  <script src="/JAVASCRIPT/timetable.js" defer></script>
+</head>
+
+<body class="timetable-page">
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="/index.html" class="logo">School Guide</a>
+      <nav aria-label="Main navigation">
+        <ul role="menubar" class="nav-list">
+          <li role="none"><a role="menuitem" href="/index.html">Home</a></li>
+          <li role="none"><a role="menuitem" href="/buildings.html">Buildings</a></li>
+          <li role="none"><a role="menuitem" href="/about.html">About</a></li>
+        </ul>
+      </nav>
+      <div class="header-controls">
+        <button id="theme-toggle" aria-label="Toggle light/dark mode">🌙</button>
+        <button id="accent-picker" aria-label="Pick accent color">🎨</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero container">
+    <h1>Custom Timetable</h1>
+    <p>Drag &amp; drop your subjects into the grid below. Rename or recolor any entry to suit your style.</p>
+  </section>
+
+  <!-- Add Subject Controls -->
+  <div class="container add-subject">
+    <input id="new-subject-name" type="text" placeholder="New subject" />
+    <button id="add-subject-btn">Add</button>
+    <button id="clear-subjects-btn" class="clear-subjects">Clear All</button>
+  </div>
+
+  <!-- Timetable & Subject Bank -->
+  <main class="container timetable-layout">
+    <!-- Subject Bank -->
+    <aside class="subject-bank panel" aria-labelledby="bank-heading">
+      <h2 id="bank-heading">Subjects</h2>
+      <ul class="bank-list" role="list">
+        <!-- JS will populate your subject items here -->
+      </ul>
+    </aside>
+
+    <!-- Timetable Grid -->
+    <section class="timetable-grid panel" role="grid" aria-labelledby="tt-heading">
+      <h2 id="tt-heading" class="visually-hidden">Weekly Timetable</h2>
+
+      <!-- Days Header -->
+      <div class="grid-header" role="row">
+        <div class="corner" role="columnheader" aria-hidden="true"></div>
+        <div role="columnheader">Mon</div>
+        <div role="columnheader">Tue</div>
+        <div role="columnheader">Wed</div>
+        <div role="columnheader">Thu</div>
+        <div role="columnheader">Fri</div>
+      </div>
+
+      <!-- Time Slots -->
+      <div class="grid-body">
+        <!-- Session 1 -->
+        <div class="time-label" role="rowheader">Session 1</div>
+        <div class="cell" role="gridcell" data-day="1" data-session="1"></div>
+        <div class="cell" role="gridcell" data-day="2" data-session="1"></div>
+        <div class="cell" role="gridcell" data-day="3" data-session="1"></div>
+        <div class="cell" role="gridcell" data-day="4" data-session="1"></div>
+        <div class="cell" role="gridcell" data-day="5" data-session="1"></div>
+
+        <!-- Recess -->
+        <div class="time-label" role="rowheader">Recess</div>
+        <div class="cell recess" role="gridcell" data-day="1" data-session="recess"></div>
+        <div class="cell recess" role="gridcell" data-day="2" data-session="recess"></div>
+        <div class="cell recess" role="gridcell" data-day="3" data-session="recess"></div>
+        <div class="cell recess" role="gridcell" data-day="4" data-session="recess"></div>
+        <div class="cell recess" role="gridcell" data-day="5" data-session="recess"></div>
+
+        <!-- Session 2 -->
+        <div class="time-label" role="rowheader">Session 2</div>
+        <div class="cell" role="gridcell" data-day="1" data-session="2"></div>
+        <div class="cell" role="gridcell" data-day="2" data-session="2"></div>
+        <div class="cell" role="gridcell" data-day="3" data-session="2"></div>
+        <div class="cell" role="gridcell" data-day="4" data-session="2"></div>
+        <div class="cell" role="gridcell" data-day="5" data-session="2"></div>
+
+        <!-- Session 3 -->
+        <div class="time-label" role="rowheader">Session 3</div>
+        <div class="cell" role="gridcell" data-day="1" data-session="3"></div>
+        <div class="cell" role="gridcell" data-day="2" data-session="3"></div>
+        <div class="cell" role="gridcell" data-day="3" data-session="3"></div>
+        <div class="cell" role="gridcell" data-day="4" data-session="3"></div>
+        <div class="cell" role="gridcell" data-day="5" data-session="3"></div>
+
+        <!-- Lunch -->
+        <div class="time-label" role="rowheader">Lunch</div>
+        <div class="cell lunch" role="gridcell" data-day="1" data-session="lunch"></div>
+        <div class="cell lunch" role="gridcell" data-day="2" data-session="lunch"></div>
+        <div class="cell lunch" role="gridcell" data-day="3" data-session="lunch"></div>
+        <div class="cell lunch" role="gridcell" data-day="4" data-session="lunch"></div>
+        <div class="cell lunch" role="gridcell" data-day="5" data-session="lunch"></div>
+
+        <!-- Session 4 -->
+        <div class="time-label" role="rowheader">Session 4</div>
+        <div class="cell" role="gridcell" data-day="1" data-session="4"></div>
+        <div class="cell" role="gridcell" data-day="2" data-session="4"></div>
+        <div class="cell" role="gridcell" data-day="3" data-session="4"></div>
+        <div class="cell" role="gridcell" data-day="4" data-session="4"></div>
+        <div class="cell" role="gridcell" data-day="5" data-session="4"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>&copy; 2025 School Guide. All rights reserved.</p>
+      <ul class="social-list">
+        <li><a href="#" aria-label="Twitter">🐦</a></li>
+        <li><a href="#" aria-label="Facebook">📘</a></li>
+        <li><a href="#" aria-label="Instagram">📸</a></li>
+      </ul>
+    </div>
+  </footer>
+</body>
+</html>

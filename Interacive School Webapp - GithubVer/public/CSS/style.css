@@ -1,0 +1,602 @@
+/*======================================
+  1. Variables & Theme
+======================================*/
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+:root {
+  /* Colors */
+  --clr-primary:   #007f3f;
+  --clr-secondary: #3cb371;
+  --clr-bg:        #f5f7fa;
+  --clr-surface:   #ffffff;
+  --clr-text:      #222222;
+  --clr-muted:     #555555;
+  --clr-accent:    #50e3c2;
+
+  /* Spacing & sizing */
+  --space-xs:  0.25rem;
+  --space-sm:  0.5rem;
+  --space-md:  1rem;
+  --space-lg:  2rem;
+  --radius:    8px;
+
+  /* Typography */
+  --fs-base:   1rem;
+  --fs-sm:     0.875rem;
+  --fs-lg:     1.25rem;
+  --lh-base:   1.6;
+
+  /* Animation */
+  --dur:       0.3s;
+  --easing:    ease-out;
+}
+
+html.dark {
+  --clr-bg:        #1e1e1e;
+  --clr-surface:   #2a2a2a;
+  --clr-text:      #f0f0f0;
+  --clr-muted:     #cccccc;
+  --clr-primary:   #3cb371;
+  --clr-secondary: #60d68a;
+}
+
+/*======================================
+  2. Reset & Base
+======================================*/
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 100%;       /* 16px */
+  scroll-behavior: smooth;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  font-size: var(--fs-base);
+  line-height: var(--lh-base);
+  color: var(--clr-text);
+  background: var(--clr-bg);
+  overflow-x: hidden;
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    url("/4Kwave.png") center top / cover no-repeat,
+    url("/wave-bg.svg") center center / cover no-repeat;
+  z-index: -1;
+  transition: filter var(--dur) var(--easing);
+}
+
+html.dark body::before {
+  filter: grayscale(100%) brightness(0.6);
+}
+
+img, svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/*======================================
+  3. Utilities & Containers
+======================================*/
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.flex {
+  display: flex;
+  gap: var(--space-md);
+}
+
+.grid {
+  display: grid;
+  gap: var(--space-lg);
+}
+
+.hidden {
+  display: none !important;
+}
+
+/*======================================
+  4. Header & Navigation
+======================================*/
+.site-header {
+  background: var(--clr-surface);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--clr-primary);
+  text-decoration: none;
+  transition: color var(--dur) var(--easing);
+}
+
+.logo:hover {
+  color: var(--clr-secondary);
+}
+
+.nav-list {
+  display: flex;
+  gap: var(--space-lg);
+}
+
+.nav-list a {
+  color: var(--clr-text);
+  font-weight: 500;
+  text-decoration: none;
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius);
+  transition: background var(--dur) var(--easing), color var(--dur) var(--easing);
+}
+
+.nav-list a:hover,
+.nav-list a:focus {
+  background: var(--clr-accent);
+  color: var(--clr-surface);
+}
+
+.header-controls {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.header-controls button {
+  width: 2.5rem;
+  height: 2.5rem;
+  background: var(--clr-bg);
+  border: 1px solid var(--clr-muted);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background var(--dur) var(--easing), transform var(--dur) var(--easing);
+}
+
+.header-controls button:hover {
+  background: var(--clr-surface);
+  transform: scale(1.1);
+}
+
+/*======================================
+  5. Hero & Feature Sections
+======================================*/
+.hero {
+  background: linear-gradient(135deg, var(--clr-primary), var(--clr-secondary));
+  color: var(--clr-surface);
+  text-align: center;
+  padding: var(--space-lg);
+  border-radius: var(--radius);
+  margin-bottom: var(--space-lg);
+  animation: fadeIn var(--dur) var(--easing);
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: var(--space-sm);
+}
+
+.hero p {
+  font-size: var(--fs-lg);
+  font-weight: 300;
+}
+
+.section-block {
+  display: grid;
+  gap: var(--space-lg);
+  margin: var(--space-lg) 0;
+  animation: slideIn var(--dur) var(--easing);
+}
+
+.home .section-block {
+  grid-template-columns: 1fr;
+  justify-items: center;
+}
+
+.feature-block,
+.text-block {
+  background: var(--clr-surface);
+  padding: var(--space-lg);
+  border-radius: var(--radius);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  transition: transform var(--dur) var(--easing), box-shadow var(--dur) var(--easing);
+}
+
+.feature-block:hover,
+.text-block:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
+
+.feature-block h2 {
+  background: linear-gradient(90deg, var(--clr-primary), var(--clr-secondary));
+  -webkit-background-clip: text;
+          background-clip: text;
+  color: transparent;
+  margin-bottom: var(--space-sm);
+}
+
+.feature-block p,
+.text-block p {
+  color: var(--clr-muted);
+}
+
+/*======================================
+  6. Timetable & Subject Bank
+======================================*/
+.timetable-container {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: var(--space-lg);
+}
+
+.panel {
+  background: var(--clr-surface);
+  border-radius: var(--radius);
+  padding: var(--space-md);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+/* Subject Bank */
+.subject-bank .bank-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.subject-item {
+  padding: var(--space-xs) var(--space-sm);
+  margin-bottom: var(--space-sm);
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-muted);
+  border-radius: var(--radius);
+  font-weight: 500;
+  cursor: grab;
+  transition: background var(--dur) var(--easing),
+              border-color var(--dur) var(--easing),
+              box-shadow var(--dur) var(--easing);
+}
+
+.subject-item:hover {
+  background: var(--clr-accent);
+  color: var(--clr-surface);
+  border-color: var(--clr-accent);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Timetable Grid */
+.timetable-grid {
+  overflow-x: auto;
+}
+
+.grid-header,
+.grid-body {
+  display: grid;
+  grid-template-columns: 80px repeat(5, 1fr);
+}
+
+.grid-header div,
+.time-label {
+  background: var(--clr-surface);
+  padding: var(--space-sm);
+  font-weight: 600;
+  text-align: center;
+}
+
+.grid-body {
+  grid-auto-rows: 80px;
+}
+
+.cell {
+  border: 1px dashed var(--clr-muted);
+  position: relative;
+  transition: background var(--dur) var(--easing);
+}
+
+.cell.highlight {
+  background: rgba(76,175,80,0.1);
+}
+
+.cell .subject-item {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--clr-text);
+}
+
+/* Action Buttons */
+.color-btn,
+.delete-btn {
+  position: absolute;
+  top: var(--space-xs);
+  background: var(--clr-surface);
+  border: none;
+  border-radius: 50%;
+  padding: var(--space-xs);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity var(--dur) var(--easing);
+}
+
+.color-btn { right: var(--space-xs); }
+.delete-btn { right: calc(var(--space-xs) + 2.5rem); }
+
+.cell:hover .color-btn,
+.cell:hover .delete-btn {
+  opacity: 1;
+}
+
+/*======================================
+  7. Add-Subject Controls
+======================================*/
+.add-subject {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-sm);
+  margin: var(--space-lg) 0;
+  width: 100%;
+}
+
+.add-subject input {
+  width: 300px;
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid var(--clr-muted);
+  border-radius: var(--radius);
+  background: var(--clr-surface);
+  color: var(--clr-text);
+  font-size: var(--fs-sm);
+  transition: border-color var(--dur) var(--easing),
+              box-shadow var(--dur) var(--easing);
+}
+
+.add-subject input:focus {
+  border-color: var(--clr-accent);
+  box-shadow: 0 0 0 3px rgba(80,227,194,0.3);
+  outline: none;
+}
+
+#add-subject-btn,
+#clear-subjects-btn {
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--dur) var(--easing),
+              transform var(--dur) var(--easing),
+              box-shadow var(--dur) var(--easing);
+}
+
+#add-subject-btn {
+  background: var(--clr-accent);
+  border: none;
+  color: var(--clr-surface);
+}
+
+#add-subject-btn:hover {
+  background: var(--clr-secondary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+#clear-subjects-btn {
+  background: transparent;
+  border: 1px solid var(--clr-muted);
+  color: var(--clr-text);
+}
+
+#clear-subjects-btn:hover {
+  background: var(--clr-muted);
+  color: var(--clr-surface);
+}
+
+/*======================================
+  8. Login-Page Overrides
+======================================*/
+body.login-page {
+  /* inherits display and background from body */
+}
+
+.login-header {
+  box-shadow: none;
+  background: transparent;
+  padding-top: var(--space-lg);
+}
+
+.login-header .logo {
+  font-size: 1.75rem;
+}
+
+.login-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-lg) 0;
+}
+
+.login-panel {
+  width: 100%;
+  max-width: 360px;
+  background: var(--clr-surface);
+  padding: var(--space-lg);
+  border-radius: var(--radius);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+  text-align: center;
+}
+
+.login-panel h1 {
+  margin-bottom: var(--space-lg);
+  font-size: 1.75rem;
+  color: var(--clr-primary);
+}
+
+.form-group {
+  margin-bottom: var(--space-md);
+  text-align: left;
+}
+
+.form-control {
+  width: 100%;
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid var(--clr-muted);
+  border-radius: var(--radius);
+}
+
+.btn-primary {
+  width: 100%;
+  padding: var(--space-sm);
+  background: var(--clr-accent);
+  border: none;
+  border-radius: var(--radius);
+  color: var(--clr-surface);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--dur) var(--easing);
+}
+
+.btn-primary:hover {
+  background: var(--clr-secondary);
+}
+
+.signup-link {
+  margin-top: var(--space-md);
+  font-size: var(--fs-sm);
+}
+
+.signup-link a {
+  color: var(--clr-primary);
+  text-decoration: none;
+}
+
+.signup-link a:hover {
+  text-decoration: underline;
+}
+
+/* Password-toggle inside login */
+.pw-wrapper { position: relative; }
+
+.toggle-pw {
+  position: absolute;
+  top: 50%;
+  right: var(--space-sm);
+  transform: translateY(-50%);
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  border-radius: 50%;
+  background: var(--clr-accent);
+  color: var(--clr-surface);
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  cursor: pointer;
+  z-index: 1;
+  transition: background var(--dur) var(--easing),
+              transform var(--dur) var(--easing),
+              box-shadow var(--dur) var(--easing);
+}
+
+.toggle-pw:hover {
+  background: var(--clr-secondary);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.toggle-pw:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(80,227,194,0.4);
+}
+
+/*======================================
+  9. Footer
+======================================*/
+.site-footer {
+  background: var(--clr-primary);
+  color: var(--clr-surface);
+  margin-top: auto;
+  padding: var(--space-sm) 0;
+}
+
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.social-list {
+  list-style: none;
+  display: flex;
+  gap: var(--space-md);
+}
+
+.social-list a {
+  font-size: 1.25rem;
+  color: var(--clr-surface);
+  transition: color var(--dur) var(--easing);
+}
+
+.social-list a:hover {
+  color: var(--clr-accent);
+}
+
+/*======================================
+ 10. Responsive
+======================================*/
+@media (max-width: 1024px) {
+  .timetable-container { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+  .nav-list { flex-direction: column; gap: var(--space-md); }
+  .section-block { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+  .hero h1 { font-size: 2rem; }
+  .grid-header,
+  .grid-body { grid-template-columns: 60px repeat(5, 1fr); }
+}
+
+/*======================================
+ 11. Animations
+======================================*/
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}

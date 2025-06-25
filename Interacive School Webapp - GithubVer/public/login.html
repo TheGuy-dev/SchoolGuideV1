@@ -1,0 +1,89 @@
+<!-- public/login.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>School Guide | Login</title>
+  <link rel="stylesheet"
+        href="{{ url_for('static', filename='CSS/style.css') }}">
+
+  <style>
+    .pw-wrapper .form-control {
+      padding-right: calc(var(--space-lg) + 1.5rem);
+    }
+    .toggle-pw {
+      z-index: 2;
+      pointer-events: auto;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      position: absolute;
+      right: 1rem;
+      top: 2.3rem;
+    }
+    .pw-wrapper {
+      position: relative;
+    }
+  </style>
+</head>
+<body class="login-page">
+  <header class="site-header login-header">
+    <div class="container header-inner">
+      <a href="{{ url_for('root') }}" class="logo">School Guide</a>
+      <div class="header-controls">
+        <button id="theme-toggle" aria-label="Toggle theme">🌙</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container login-container">
+    <section class="panel login-panel">
+      <h1>Welcome Back</h1>
+
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, msg in messages %}
+            <div class="flash flash-{{ category }}">{{ msg }}</div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+
+      <form method="POST" action="{{ url_for('login') }}" novalidate>
+        {{ form.hidden_tag() }}
+
+        <div class="form-group">
+          {{ form.username.label }}
+          {{ form.username(class="form-control", placeholder="Username") }}
+          {% if form.username.errors %}
+            <div class="field-error">{{ form.username.errors[0] }}</div>
+          {% endif %}
+        </div>
+
+        <div class="form-group pw-wrapper">
+          {{ form.password.label }}
+          {{ form.password(class="form-control", id="password") }}
+          <button type="button" id="togglePassword" class="toggle-pw" aria-label="Show/hide password">👁️</button>
+          {% if form.password.errors %}
+            <div class="field-error">{{ form.password.errors[0] }}</div>
+          {% endif %}
+        </div>
+
+        <div class="form-group remember">
+          {{ form.remember() }} {{ form.remember.label }}
+        </div>
+
+        <button type="submit" class="btn-primary">{{ form.submit.label.text }}</button>
+      </form>
+
+      <p class="signup-link">
+        Don’t have an account?
+        <a href="{{ url_for('register') }}">Register here</a>
+      </p>
+    </section>
+  </main>
+
+  <script src="{{ url_for('static', filename='JAVASCRIPT/main.js') }}" defer></script>
+</body>
+</html>
