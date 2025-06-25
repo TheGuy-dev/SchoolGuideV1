@@ -1,0 +1,86 @@
+<!-- public/2fa_verify.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>School Guide | Verify 2FA</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='CSS/style.css') }}">
+  <style>
+    .pw-wrapper {
+      position: relative;
+    }
+    .toggle-pw {
+      position: absolute;
+      top: 50%;
+      right: 1rem;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+    .form-control::placeholder {
+      color: #999;
+      font-style: italic;
+    }
+  </style>
+</head>
+<script src="{{ url_for('static', filename='JAVASCRIPT/main.js') }}" defer></script>
+<body class="login-page">
+  <header class="site-header login-header">
+    <div class="container header-inner">
+      <a href="{{ url_for('home') }}" class="logo">School Guide</a>
+      <div class="header-controls">
+        <button id="theme-toggle" aria-label="Toggle theme">🌙</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container login-container">
+    <section class="panel login-panel">
+      <h1>Verify Two-Factor Code</h1>
+
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, msg in messages %}
+            <div class="flash flash-{{ category }}">{{ msg }}</div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+
+      <form method="POST">
+        {{ form.hidden_tag() }}
+
+        <div class="form-group pw-wrapper">
+          {{ form.token.label }}
+          {{ form.token(class="form-control", id="token-field", placeholder="Enter 6-digit code") }}
+          <button type="button" class="toggle-pw" aria-label="Show/hide code">👁️</button>
+          {% if form.token.errors %}
+            <div class="field-error">{{ form.token.errors[0] }}</div>
+          {% endif %}
+        </div>
+
+        <button type="submit" class="btn-primary">Verify</button>
+      </form>
+    </section>
+  </main>
+
+  <script>
+    (function() {
+      const input = document.getElementById('token-field');
+      const btn = document.querySelector('.toggle-pw');
+      if (!input || !btn) return;
+      btn.addEventListener('click', () => {
+        if (input.type === 'password') {
+          input.type = 'text';
+          btn.textContent = '🙈';
+        } else {
+          input.type = 'password';
+          btn.textContent = '👁️';
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

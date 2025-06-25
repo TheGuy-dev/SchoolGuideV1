@@ -1,0 +1,43 @@
+<!-- public/2fa_setup.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>School Guide | 2FA Setup</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='CSS/style.css') }}">
+</head>
+<body class="login-page">
+  <header class="site-header login-header">
+    <div class="container header-inner">
+      <a href="{{ url_for('login') }}" class="logo">School Guide</a>
+      <div class="header-controls">
+        <button id="theme-toggle" aria-label="Toggle theme">🌙</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container login-container">
+    <section class="panel login-panel">
+      <h1>Two-Factor Setup</h1>
+      <p>Scan this QR code with your authenticator app:</p>
+
+      
+      <img src="data:image/png;base64,{{ qr_img }}" alt="QR Code">
+
+
+      <form method="POST" action="{{ url_for('two_factor_setup') }}">
+        {{ form.hidden_tag() }}
+        <button type="submit" class="btn-primary">I’ve Scanned It</button>
+      </form>
+
+      <p class="signup-link">
+        Already set up? 
+        <a href="{{ url_for('two_factor_verify') }}">Enter your code</a>
+      </p>
+    </section>
+  </main>
+
+  <script src="{{ url_for('static', filename='JAVASCRIPT/main.js') }}" defer></script>
+</body>
+</html>

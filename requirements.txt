@@ -1,0 +1,7 @@
+Flask
+passlib
+pyotp
+Flask-Talisman
+Flask-Limiter
+WTForms
+Flask-WTF
